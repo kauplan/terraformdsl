@@ -1,3 +1,5 @@
-module Terraformdsl
-  VERSION = "0.1.0"
+# -*- coding: utf-8 -*-
+
+module TerraformDSL
+  VERSION = "0.0.1"
 end
