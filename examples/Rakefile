@@ -1,0 +1,42 @@
+
+task :setenv do
+  ENV['AWS_DEFAULT_REGION'] = "us-east-1"
+  ENV['APP_ENV'] ||= "prod"
+  #ENV['APP_ENV'] ||= "stg"
+  #ENV['APP_ENV'] ||= "dev"
+end
+
+desc "*.rb -> *.tf"
+task :generate => :setenv do
+  sh "ruby aws-infra.rb > aws-infra.tf"
+end
+
+desc "terraform init"
+task :init do
+  sh "terraform init"
+end
+
+desc "terraform plan"
+task :plan => [:generate, :init] do
+  sh "terraform plan"
+end
+
+desc "terraform apply"
+task :apply => [:generate, :init] do
+  sh "terraform apply"
+end
+
+desc "terraform destroy"
+task :destroy do
+  sh "terraform destroy"
+end
+
+desc "terraform output"
+task :output do
+  sh "terraform output"
+end
+
+desc "terraform refresh"
+task :refresh do
+  sh "terraform refresh"
+end
